@@ -1,6 +1,6 @@
 
 # 1. Library imports
-import pandas as pd 
+import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from pydantic import BaseModel
 import joblib
@@ -8,26 +8,26 @@ import joblib
 
 # 2. Class which describes a single flower measurements
 class IrisSpecies(BaseModel):
-    sepal_length: float 
-    sepal_width: float 
-    petal_length: float 
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
     petal_width: float
 
 
 # 3. Class for training the model and making predictions
 class IrisModel:
     # 6. Class constructor, loads the dataset and loads the model
-    #    if exists. If not, calls the _train_model method and 
+    #    if exists. If not, calls the _train_model method and
     #    saves the model
     def __init__(self):
         self.df = pd.read_csv('iris.csv')
-        self.model_fname_ = 'iris_model.pkl'
+        self.model_fname_ = 'iris_model.joblib'
         try:
             self.model = joblib.load(self.model_fname_)
         except Exception as _:
             self.model = self._train_model()
             joblib.dump(self.model, self.model_fname_)
-        
+
 
     # 4. Perform model training using the RandomForest classifier
     def _train_model(self):
